@@ -14,9 +14,9 @@ This project is part of the Progressive Web Apps course at Amsterdam University 
 ### Exercise 1: Refactor the WAFS App to a server side version with Node.js & Express
 
 - [x] Forked the repo: [Progressive Web Apps 2022](https://github.com/your-username/progressive-web-apps-2022)
-- [x] Refactored the app
-- [x] Updated CSS
-- [x] Improved app with client-side JavaScript
+- [ ] Refactored the app
+- [ ] Updated CSS
+- [ ] Improved app with client-side JavaScript
 
 #### Progress Update
 
