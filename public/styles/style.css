@@ -32,6 +32,10 @@ body {
     overflow-x: hidden;
 }
 
+body:has(main .flex100) {
+    display: unset;
+}
+
 body.noGrid {
     display: flex;
     flex-direction: column;
@@ -121,6 +125,10 @@ main>section:not(.flex50) {
     background: var(--primary-darker-color);
     padding: 1em;
     border-radius: .5em;
+}
+
+.flex100 {
+    flex: 1 1 96vw;
 }
 
 .flex50 {
@@ -385,13 +393,17 @@ img::after {
     filter: brightness(0.5);
 }
 
-.column figure figcaption ul li a {
+.column figure figcaption ul li:nth-of-type(2) a {
     flex: 1 1 100%;
     margin-top: .5em;
     border-radius: .5em;
     overflow: hidden;
     max-width: 100%;
     position: relative;
+}
+
+.column figure figcaption ul li:nth-of-type(3) a {
+    flex: 1 1 3em;
 }
 
 .column figure figcaption ul li a img,
@@ -403,10 +415,14 @@ img::after {
     object-fit: cover;
 }
 
+.column figure figcaption ul li a svg {
+    max-height: 3.5em;
+}
+
 .column figure figcaption ul li:nth-of-type(3) {
     display: flex;
     gap: 1em;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .column figure figcaption ul li:nth-of-type(2) a:hover img,
