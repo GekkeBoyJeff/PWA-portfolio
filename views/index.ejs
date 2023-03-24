@@ -1,6 +1,4 @@
 <%- include("partials/head") %>
-
-<body>
   <header class="hidden">
   <h1>Portfolio Jeffrey Ullers</h1>
   </header>
@@ -10,7 +8,10 @@
         <h2 class="hidden">Ervaring in een oogopslag</h2> <!-- hidden -->
         <!-- quote, button | ervaringen * 3 -->
         <blockquote cite="#">
-          <p></p>
+          <p>
+            <!-- random quote -->
+            <%- quote %>
+          </p>
         </blockquote>
       </div>
       <ul class="height50">
@@ -68,31 +69,17 @@
         <h2>Portfolio</h2>
         <a href="projects">Zie meer</a>
       </header>
-      <a href="#">
+      
+      <% repos.forEach((repo, i) => { %>
+        <a href="projects/<%= repos[i].repo %>">
         <figure>
-          <img src="" alt="">
+          <img src="<%= repoImages[i] %>" alt="<%= repos[i].repo %>">
           <figcaption>
-            <h3></h3>
-            <p></p>
-          </figcaption>
-        </figure>
-      </a><a href="#">
-        <figure>
-          <img src="" alt="">
-          <figcaption>
-            <h3></h3>
-            <p></p>
-          </figcaption>
-        </figure>
-      </a><a href="#">
-        <figure>
-          <img src="" alt="">
-          <figcaption>
-            <h3></h3>
-            <p></p>
+            <h3><%= repos[i].repo %></h3>
           </figcaption>
         </figure>
       </a>
+      <% }) %>
     </section>
     <section class="flex70">
       <header>

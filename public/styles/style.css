@@ -33,7 +33,9 @@ body {
 }
 
 body:has(main .flex100) {
-    display: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 body.noGrid {
@@ -129,6 +131,7 @@ main>section:not(.flex50) {
 
 .flex100 {
     flex: 1 1 96vw;
+    max-width: 96vw;
 }
 
 .flex50 {
