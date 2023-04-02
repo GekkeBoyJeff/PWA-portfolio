@@ -1,5 +1,6 @@
 import express from 'express';
-import { Remarkable } from 'remarkable';
+import showdown from 'showdown'
+import showdownHighlight from 'showdown-highlight'
 
 const router = express.Router();
 
@@ -8,9 +9,6 @@ router.get('/', async (req, res) => {
     // fetch all repos from github
     const response = await fetch(`https://api.github.com/users/${username}/repos`);
     const data = await response.json();
-    // for (let i = 0; i < data.length; i++) {
-    //     console.log(data[i].name)
-    // }
 
     res.render('projects', { data });
 });
@@ -22,9 +20,18 @@ router.get('/:name', async (req, res) => {
 
     const response = await fetch(`https://raw.githubusercontent.com/${username}/${name}/main/README.md`);
     const data = await response.text();
-    var md = new Remarkable();
-
-    var html = md.render(data);
+    let converter = new showdown.Converter({
+        // That's it
+        extensions: [showdownHighlight({
+            // Whether to add the classes to the <pre> tag, default is false
+            pre: true
+            // Whether to use hljs' auto language detection, default is true
+        ,   auto_detection: true
+        })]
+    });
+    let html = converter.makeHtml(data);
+    // replaceall
+    html = html.replaceAll('\t', '  ');
     console.log(html)
 
     res.render(`detail` ,{name, html});

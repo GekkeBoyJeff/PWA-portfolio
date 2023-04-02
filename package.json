@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "",
+    "test": "node app.js",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -19,7 +19,7 @@
     "express": "^4.18.2",
     "node-fetch": "^3.3.1",
     "nodemon": "^2.0.21",
-    "remarkable": "^2.0.1",
-    "showdown": "^2.1.0"
+    "showdown": "^2.1.0",
+    "showdown-highlight": "^3.1.0"
   }
 }
