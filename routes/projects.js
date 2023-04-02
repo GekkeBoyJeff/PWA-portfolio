@@ -1,13 +1,19 @@
 import express from 'express';
 import showdown from 'showdown'
 import showdownHighlight from 'showdown-highlight'
+import dotenv from 'dotenv';
+dotenv.config();
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     const username = 'GekkeBoyJeff';
     // fetch all repos from github
-    const response = await fetch(`https://api.github.com/users/${username}/repos`);
+    const response = await fetch(`https://api.github.com/users/${username}/repos`, {
+        headers: {
+            Authorization: `token ${process.env.GITHUB_API_TOKEN}`,
+        },
+    });
     const data = await response.json();
 
     res.render('projects', { data });

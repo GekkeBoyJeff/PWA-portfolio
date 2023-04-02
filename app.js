@@ -1,5 +1,6 @@
 import fs from "fs";
 import https from "https";
+import dotenv from 'dotenv';
 
 const key = fs.readFileSync("localhost-key.pem", "utf-8");
 const cert = fs.readFileSync("localhost.pem", "utf-8");
