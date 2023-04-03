@@ -51,6 +51,7 @@ jobs:
   deploy:
     name: Deploy to server
     runs-on: ubuntu-22.04
+    needs: build-and-push-image
     steps:
       - name: Deploy to server via SSH action
         uses: appleboy/ssh-action@master
