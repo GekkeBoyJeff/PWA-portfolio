@@ -325,7 +325,8 @@ figure {
 .flex50 figure>img {
     flex: 1 1 35%;
     min-height: 20em;
-    width: 15vw;
+    width: 8vw;
+    height: 27.3em;
     object-fit: cover;
     border-radius: .5em;
 }
