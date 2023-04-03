@@ -9,12 +9,6 @@
     transition: .5s;
 }
 
-img {
-    width: 100%;
-    background: var(--primary-color);
-    animation: skeleton-loading 1s linear infinite alternate;
-}
-
 :root {
     --primary-color: rgb(89 87 214);
     --primary-darker-color: #23272d;
@@ -23,6 +17,12 @@ img {
     --black-color: #151618;
     --gray-color: #f9f9f9;
     --font-color: #ffffff;
+}
+
+img {
+    width: 100%;
+    background: var(--primary-color);
+    animation: skeleton-loading 1s linear infinite alternate;
 }
 
 body {
