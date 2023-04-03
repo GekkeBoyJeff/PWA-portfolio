@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  nginx:
+    image: ghcr.io/gekkeboyjeff/pwa-portfolio:main
+    ports:
+      - "3000:3000"

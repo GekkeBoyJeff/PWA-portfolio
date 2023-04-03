@@ -48,3 +48,23 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  deploy:
+    name: Deploy to server
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Deploy to server via SSH action
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            if [ ! -d PWA-portfolio ] 
+              then
+                git clone https://github.com/GekkeBoyJeff/PWA-portfolio.git
+            fi
+            cd PWA-portfolio
+            docker compose down
+            git pull
+            docker compose pull
+            docker compose up -d
