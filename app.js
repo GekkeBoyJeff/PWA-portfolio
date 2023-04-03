@@ -1,9 +1,9 @@
-import fs from "fs";
-import https from "https";
-import dotenv from 'dotenv';
+// import fs from "fs";
+// import https from "https";
+import compression from 'compression';
 
-const key = fs.readFileSync("localhost-key.pem", "utf-8");
-const cert = fs.readFileSync("localhost.pem", "utf-8");
+// const key = fs.readFileSync("localhost-key.pem", "utf-8");
+// const cert = fs.readFileSync("localhost.pem", "utf-8");
 
 import express from 'express'
 import projectsRouter from './routes/projects.js';
@@ -13,6 +13,7 @@ const app = express()
 const port = 3000
 
 app.set('view engine', 'ejs')
+app.use(compression()); // Add gzip compression middleware
 app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
@@ -36,13 +37,13 @@ app.get('/offline', async (req, res) => {
 
 app.use('/projects', projectsRouter);
 
-https.createServer({ key, cert }, app).listen(port, () => {
-  console.log(`Server is running on port https://localhost:${port}`)
-});
+// https.createServer({ key, cert }, app).listen(port, () => {
+//   console.log(`Server is running on port https://localhost:${port}`)
+// });
 
-// app.listen(port, () => {
-//   console.log(`Server is running on port http://127.0.0.1:${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Server is running on port http://127.0.0.1:${port}`)
+})
 
 // andere caching strategie proberen
 // CACHE-first

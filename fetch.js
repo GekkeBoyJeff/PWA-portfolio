@@ -4,7 +4,8 @@ export async function fetchRepos(username) {
   const response = await fetch(`https://gh-pinned-repos.egoist.dev/?username=${username}`)
   return response.json()
 }
-
+// generate an array of image URLs 
+// Map creates a new array by applying a function to each element of the array.
 export function mapRepoImages(username, repos) {
   return repos.map((repo) => {
     return `https://raw.githubusercontent.com/${username}/${repo.repo}/main/assets/mockup-small.webp`

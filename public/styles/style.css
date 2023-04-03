@@ -326,8 +326,6 @@ figure {
     flex: 1 1 35%;
     min-height: 20em;
     width: 15vw;
-    height: 27em;
-    /* max-height: 60vh; */
     object-fit: cover;
     border-radius: .5em;
 }
@@ -619,11 +617,9 @@ body:has(main:hover)::before {
     }
 }
 
-@media(min-width: 707px) {
+@media(min-width: 707px) and (max-width: 943px) {
     .flex50 figure>img {
-        max-width: 35%;
-        max-height: unset;
-        /* height: auto; */
+        height: 31.8em;
     }
 }
 

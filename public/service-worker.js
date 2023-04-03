@@ -4,8 +4,8 @@ const mainCacheAssets = [
   '/projects',
   '/styles/style.css',
   '/js/main.js',
-  'img/jeff.webp',
-  'img/Zaandam.webp',
+  '/img/jeff.webp',
+  '/img/Zaandam.webp',
   '/offline',
 ];
 

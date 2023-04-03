@@ -69,46 +69,20 @@
         <h2>Portfolio</h2>
         <a href="projects">Zie meer</a>
       </header>
-      <a id="link-1" href="" data-src="" data-alt="" data-title="">
-        <figure>
-          <img id="image-1" src="" alt="" >
-          <figcaption>
-            <h3 id="title-1"></h3>
-          </figcaption>
-        </figure>
-      </a>
-      
-      <a id="link-2" href="" data-src="" data-alt="" data-title="">
-        <figure>
-          <img id="image-2" src="" alt="" >
-          <figcaption>
-            <h3 id="title-2"></h3>
-          </figcaption>
-        </figure>
-      </a>
-      
-      <a id="link-3" href="" data-src="" data-alt="" data-title="">
-        <figure>
-          <img id="image-3" src="" alt="" >
-          <figcaption>
-            <h3 id="title-3"></h3>
-          </figcaption>
-        </figure>
-      </a>
-      <% repos.forEach((repo, i) => { %>
-        <% if (i < 3) { %>
-          <script type="text/javascript">
-            var link = document.querySelector('#link-<%= i + 1 %>');
-            var image = link.querySelector('img');
-            var title = link.querySelector('h3');
-      
-            link.href = 'projects/<%= repo.repo %>';
-            image.src = '<%= repoImages[i] %>';
-            image.alt = '<%= repo.repo %>';
-            title.textContent = '<%= repo.repo %>';
-          </script>
-        <% } %>
-      <% }) %>
+      <% repos.slice(0, 3).forEach((repo, i) => { %>
+        <% var linkId = 'link-' + (i + 1); %>
+        <% var imageId = 'image-' + (i + 1); %>
+        <% var titleId = 'title-' + (i + 1); %>
+        
+        <a id="<%= linkId %>" href="projects/<%= repo.repo %>" data-src="<%= repoImages[i] %>" data-alt="<%= repo.repo %>" data-title="<%= repo.repo %>">
+          <figure>
+            <img id="<%= imageId %>" src="<%= repoImages[i] %>" alt="<%= repo.repo %>" crossorigin="anonymous">
+            <figcaption>
+              <h3 id="<%= titleId %>"><%= repo.repo %></h3>
+            </figcaption>
+          </figure>
+        </a>
+      <% }); %>
     </section>
     <section class="flex70">
       <header>
