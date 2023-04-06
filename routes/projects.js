@@ -27,11 +27,9 @@ router.get('/:name', async (req, res) => {
     const response = await fetch(`https://raw.githubusercontent.com/${username}/${name}/main/README.md`);
     const data = await response.text();
     let converter = new showdown.Converter({
-        // That's it
         extensions: [showdownHighlight({
             // Whether to add the classes to the <pre> tag, default is false
             pre: true
-            // Whether to use hljs' auto language detection, default is true
         ,   auto_detection: true
         })]
     });

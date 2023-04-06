@@ -1,6 +1,6 @@
+import compression from 'compression';
 // import fs from "fs";
 // import https from "https";
-import compression from 'compression';
 
 // const key = fs.readFileSync("localhost-key.pem", "utf-8");
 // const cert = fs.readFileSync("localhost.pem", "utf-8");
@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
     const repoImages = mapRepoImages(username, repos)
 
     const quote = await fetchQuote();
-    res.render('index', { repos, repoImages, quote })
+    res.render('build/index', { repos, repoImages, quote })
   } catch (error) {
     console.error(error.message)
     res.status(500).end()
@@ -44,7 +44,3 @@ app.use('/projects', projectsRouter);
 app.listen(port, () => {
   console.log(`Server is running on port http://127.0.0.1:${port}`)
 })
-
-// andere caching strategie proberen
-// CACHE-first
-// still while revalidate

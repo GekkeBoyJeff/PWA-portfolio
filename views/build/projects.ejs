@@ -1,0 +1,1 @@
+<%- include("partials/head") %><header><h1>Projecten</h1></header><main><section class="flex100"><ul><% data.forEach(function(project) { %><li><a href="/projects/<%= project.name %>"><h3><%= project.name %></h3></a></li><% }); %></ul></section></main><%- include("partials/footer") %>

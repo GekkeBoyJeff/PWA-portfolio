@@ -650,8 +650,6 @@ span.hljs-built_in {
     color: #87ef87;
 }
 
-span.hljs-built_in {}
-
 span.hljs-tag {
     color: gray;
 }
@@ -751,11 +749,6 @@ main.offline section {
     padding: 1em;
     display: flex;
     flex-direction: column;
-}
-
-.skeleton {
-    opacity: .5;
-    animation: skeleton-loading 1s linear infinite alternate;
 }
 
 @keyframes skeleton-loading {

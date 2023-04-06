@@ -2,16 +2,110 @@
 
 This project is part of the Progressive Web Apps course at Amsterdam University of Applied Sciences. The goal is to build a server-side rendered application using Node.js, TypeScript, and Express, and then gradually enhance it to become a Progressive Web App (PWA).
 
+**Installatie**
+1. Clone de repo
+2. gebruik 'npm run dev' om een lokale server te starten.
+
+[Klik hier voor de live demo](https://portfolio.gekkeboyjeff.repl.co)
+
 ## Table of Contents
 
-- [Week 1](#week-1)
-- [Week 2](#week-2)
-- [Week 3](#week-3)
-- [Getting Started](#getting-started)
+- [About](#About)
+- [Client side rendering](#Client side rendering)
+- [Activity diagram](#activity diagram)
+- [Service worker](#service worker)
+- [Critical rendering path](#criticalRenderingPath)
+- [Uitdaging week 1](#Week1)
 
 
+## About
+Deze Progressive Web App (PWA) is ontworpen om mijn professionele portfolio weer te geven en te laten zien welke projecten en vaardigheden ik heb verworven gedurende mijn carrière. Het unieke kenmerk van deze PWA is dat het gebruikmaakt van de GitHub API om real-time gegevens over mijn projecten en bijdragen op te halen. Hierdoor wordt de inhoud van mijn portfolio automatisch bijgewerkt met de meest recente informatie over mijn werk.
 
-## Week 1
+### Features
+[x] Recente data ophalen
+[x] Lees de meest recente informatie over mijn projecten
+[x] Random quote als opvrolijker
+[x] Gecachde pagina's voor een snellere ervaring.
+
+## Client side rendering
+Server-side rendering (SSR) is de techniek waarbij een webpagina op de server wordt weergegeven voordat deze naar de client wordt verzonden, wat resulteert in snellere laadtijden en betere SEO. In dit geval gebruik ik SSR om mijn ​​portfoliowebsite te genereren op basis van mijn GitHub API-gegevens. Node.js en Express worden gebruikt om de webserver in te stellen en EJS werkt als een templating-engine voor het maken van dynamische HTML-inhoud. SSR leidt tot verbeterde prestaties en zichtbaarheid van zoekresultaten.
+
+## activity diagram
+
+![](gh-assets/activityDiagram.png)
+
+## service worker
+
+De 'stale while revalidate'-techniek is een cachingstrategie die ik heb toegepast om de prestaties en gebruikerservaring van mijn webproject te verbeteren. Deze techniek biedt een balans tussen het snel leveren van content en het up-to-date houden van de cache.
+
+Bij 'stale while revalidate' wordt een gecachte versie van de bron onmiddellijk naar de gebruiker gestuurd, terwijl tegelijkertijd op de achtergrond een update van de bron uit het netwerk wordt opgehaald en de cache wordt bijgewerkt. Dit zorgt voor snelle laadtijden en een soepele gebruikerservaring, omdat gebruikers niet hoeven te wachten op het ophalen van de meest recente versie van een bron.
+
+Tegelijkertijd zorgt deze techniek ervoor dat de cache regelmatig wordt bijgewerkt, waardoor gebruikers de meest recente content krijgen bij hun volgende bezoek. Dit is een effectieve oplossing voor het balanceren van snelheid en actualiteit van content, waardoor de algehele prestaties en gebruikerservaring van het webproject worden verbeterd.
+
+![](gh-assets/serviceWorker.png)
+
+## critical rendering path
+
+| old    |  new   |
+| --- | --- |
+| ![](gh-assets/scoreOld.png)    | ![](gh-assets/scoreNew.png)     |
+
+
+Om de critical rendering path te optimaliseren en een snellere laadtijd en betere gebruikerservaring te bieden, heb ik verschillende stappen ondernomen om mijn webproject te verbeteren. Hier is een uitgebreid overzicht van de stappen die ik heb gevolgd en de technieken die ik heb toegepast:
+
+1.  Gulp-taken voor het verkleinen van bestanden: Ik heb Gulp gebruikt om verschillende taken te definiëren om JavaScript-, CSS- en EJS-bestanden te verkleinen. Dit resulteert in kleinere bestanden die sneller door de browser kunnen worden gedownload en verwerkt. Met behulp van Gulp-pakketten zoals gulp-concat, gulp-minify en gulp-clean-css, worden de bestanden samengevoegd en gecomprimeerd voordat ze naar hun respectievelijke build-mappen worden verplaatst. 
+
+```JS
+import gulp from 'gulp';
+import concat from 'gulp-concat';
+import minify from 'gulp-minify';
+import cleanCss from 'gulp-clean-css';
+import minifyejs from 'gulp-minify-ejs';
+
+gulp.task('pack-js', function () {    
+    return gulp.src(['public/js/*.js'])
+        .pipe(concat('main.js'))
+        .pipe(minify({
+            ext:{
+                min:'.js'
+            },
+            noSource: true
+        }))
+        .pipe(gulp.dest('public/build/js'));
+});
+ 
+gulp.task('pack-css', function () {    
+    return gulp.src(['public/styles/*.css'])
+        .pipe(concat('style.css'))
+        .pipe(cleanCss())
+        .pipe(gulp.dest('public/build/css'));
+});
+gulp.task('minify-pages', function() {
+    return gulp.src(['views/*.ejs'])
+        .pipe(minifyejs())
+        //.pipe(rename({suffix:".min"}))
+        .pipe(gulp.dest('views/build'))
+})
+gulp.task('minify-static', function() {
+    return gulp.src(['views/partials/*.ejs'])
+        .pipe(minifyejs())
+        //.pipe(rename({suffix:".min"}))
+        .pipe(gulp.dest('views/build/partials'))
+});
+gulp.task('default', gulp.series('pack-js', 'pack-css', 'minify-pages', 'minify-static'));
+```
+ 
+4. Afbeeldingen optimaliseren: Om de laadtijd van afbeeldingen te verminderen, heb ik alle statische afbeeldingen verkleind en geconverteerd naar het moderne en efficiënte WebP-formaat. Dit zorgt voor een aanzienlijke vermindering van de bestandsgrootte zonder kwaliteitsverlies, wat resulteert in snellere laadtijden en minder bandbreedteverbruik.
+5.  Crossorigin-attribuut voor gefetchte afbeeldingen: Om de cache te verkleinen, heb ik het crossorigin="anonymous"-attribuut toegevoegd aan alle gefetchte afbeeldingen. Dit zorgt ervoor dat de browser geen extra referentie-informatie opslaat en de cache efficiënter maakt.
+6.  Caching van belangrijke bronnen en bestanden: Om de laadtijden voor terugkerende bezoekers te verbeteren, heb ik de volgende pagina's en bestanden gecached:
+    -   Homepagina
+    -   Projectenpagina
+    -   Belangrijke CSS- en JavaScript-bestanden
+    -   Enkele afbeeldingen
+    -   Een offline pagina voor het geval er geen internetverbinding is
+7.  Server-side rendering (SSR) voor content en quotes: Ten slotte heb ik gebruikgemaakt van SSR om de inhoud van mijn webpagina's te genereren. Dit betekent dat alle benodigde HTML-inhoud op de server wordt gemaakt voordat deze naar de client wordt gestuurd, wat resulteert in snellere laadtijden en een betere SEO. Voorheen was het genereren van quotes client-side, maar nu is dit ook server-side, wat bijdraagt aan een efficiëntere en snellere weergave van de pagina.
+
+## Week1
 
 ### Exercise 1: Refactor the WAFS App to a server side version with Node.js & Express
 
@@ -210,50 +304,7 @@ app.use('/projects', projectsRouter);
 
 ---
 
-## Week 2
 
-### Exercise 1: Convert your app into a Progressive Web App
-
-WPA => Https - service workers and manifest
-
-voordelen:
-1. offline support
-2. service workers
-	1. Javascript
-	2. web worker
-	3. Draait in het achtergrond
-	4. aparte thread(achtergrond)
-	5. event based (idle en luisterd alleen naar events)
-	6. geen toegang tot de DOM
-	7. geen Global state
-3. push notifications
-4. Native sharing
-5. Desktop apps
-
-Registreer service worker:
-```JS
-if ('serviceWorker' in navigator) {
-	 window.addEventListener(‘load’, function() {
-		 navigator.serviceWorker.register('/service-worker.js')
-		 .then(function(registration) {
-		 return registration.update();
-	 })
- });
-}
-```
-
-SERVICE WORKER LIFECYCLE
-```JS
-self.addEventListener(‘install’, event => { /* do I even exist? */ }); self.addEventListener(‘activate’, event => { /* am I even active? */ }); self.addEventListener(‘fetch’, event => { /* can I even do cool stuff? /* })
-```
-
-Cache on install (cache storage (local storage voor requests en responses))
-cache on fetch
-
-serve page from cache
-
-precaching is essentieel om je website snel te laten werken (offline fallback pagina, css pagina, en misschien een javascript)
-pre-caching doe je in het install event
 ```JS
 const CORE_CACHE_NAME = 'core-cache';
 const CORE_ASSETS = [/* css, bundle.js offline page */]
@@ -326,22 +377,4 @@ self.addEventListener(‘sync’, event => {
 })
 ```
 
-**Caching strategies**
 
-Er zijn een aantal caching strategieen die je kan toepassen. namelijk:
-1. Cache only
-2. Network only
-3. Cache first
-4. Network first
-5. Stale while validate
-6. Stale while revalidate
-7. Generic fallback
-
-- [ ] Make an installable version of the app
-
-### Exercise 2: Implement a Service Worker
-
-- [ ] Implement a Service Worker
-- [ ] Create a job story
-- [ ] Cache and serve static assets
-- [ ] Provide online/offline
