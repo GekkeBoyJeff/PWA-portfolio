@@ -4,7 +4,10 @@ This project is part of the Progressive Web Apps course at Amsterdam University 
 
 **Installatie**
 1. Clone de repo
-2. gebruik 'npm run dev' om een lokale server te starten.
+2. gebruik de volgende commando's:
+	1. mkcert -install 
+	2. mkcert localhost
+3. gebruik daarna 'npm run dev' om een lokale server te starten.
 
 [Klik hier voor de live demo](https://portfolio.gekkeboyjeff.repl.co)
 
