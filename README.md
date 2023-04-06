@@ -29,6 +29,7 @@ Deze Progressive Web App (PWA) is ontworpen om mijn professionele portfolio weer
 [x] Lees de meest recente informatie over mijn projecten
 [x] Random quote als opvrolijker
 [x] Gecachde pagina's voor een snellere ervaring.
+[x] Installeerbaar
 
 ## Client side rendering
 Server-side rendering (SSR) is de techniek waarbij een webpagina op de server wordt weergegeven voordat deze naar de client wordt verzonden, wat resulteert in snellere laadtijden en betere SEO. In dit geval gebruik ik SSR om mijn ​​portfoliowebsite te genereren op basis van mijn GitHub API-gegevens. Node.js en Express worden gebruikt om de webserver in te stellen en EJS werkt als een templating-engine voor het maken van dynamische HTML-inhoud. SSR leidt tot verbeterde prestaties en zichtbaarheid van zoekresultaten.
@@ -52,7 +53,6 @@ Tegelijkertijd zorgt deze techniek ervoor dat de cache regelmatig wordt bijgewer
 | old    |  new   |
 | --- | --- |
 | ![](gh-assets/scoreOld.png)    | ![](gh-assets/scoreNew.png)     |
-
 
 Om de critical rendering path te optimaliseren en een snellere laadtijd en betere gebruikerservaring te bieden, heb ik verschillende stappen ondernomen om mijn webproject te verbeteren. Hier is een uitgebreid overzicht van de stappen die ik heb gevolgd en de technieken die ik heb toegepast:
 
@@ -107,6 +107,35 @@ gulp.task('default', gulp.series('pack-js', 'pack-css', 'minify-pages', 'minify-
     -   Enkele afbeeldingen
     -   Een offline pagina voor het geval er geen internetverbinding is
 7.  Server-side rendering (SSR) voor content en quotes: Ten slotte heb ik gebruikgemaakt van SSR om de inhoud van mijn webpagina's te genereren. Dit betekent dat alle benodigde HTML-inhoud op de server wordt gemaakt voordat deze naar de client wordt gestuurd, wat resulteert in snellere laadtijden en een betere SEO. Voorheen was het genereren van quotes client-side, maar nu is dit ook server-side, wat bijdraagt aan een efficiëntere en snellere weergave van de pagina.
+
+## Manifest
+
+Om de applicatie installeerbaar te maken heb ik de volgende inhoud toegevoegd aan mijn manifest.json:
+```Json
+{
+    "name": "Jeffrey Ullers portfolio",
+    "short_name": "Jeffrey's Portfolio",
+    "description": "Dit is de portfolio van Jeffrey Ullers",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#151618",
+    "theme_color": "#151618",
+    "icons": [
+        {
+            "src": "img/logo192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/logo512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
+```
 
 ## Week1
 
