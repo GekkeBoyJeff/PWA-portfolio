@@ -14,9 +14,9 @@ This project is part of the Progressive Web Apps course at Amsterdam University 
 ## Table of Contents
 
 - [About](#About)
-- [Client side rendering](#Client side rendering)
-- [Activity diagram](#activity diagram)
-- [Service worker](#service worker)
+- [Client side rendering](#ClientSideRendering)
+- [Activity diagram](#activityDiagram)
+- [Service worker](#serviceWorker)
 - [Critical rendering path](#criticalRenderingPath)
 - [Uitdaging week 1](#Week1)
 
